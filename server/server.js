@@ -5,16 +5,21 @@ const cookieParser = require('cookie-parser');
 const socketIO = require('socket.io');
 const logger = require('morgan');
 const cors = require('cors');
+const config = require('./config');
 
 
 const app = express();
-app.locals.port = 5000;
+app.locals.port = config.port;
 
 app.use(express.static(__dirname + '/public'));
-app.use(logger('dev'));
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+if (config.enableLogging) {
+    app.use(logger('dev'));
+}
+if (config.originUrl) {
+    app.use(cors({ origin: config.originUrl, credentials: true }));
+}
 
-app.use(cookieParser('chatserversecretkey'));
+app.use(cookieParser(config.sessionSecretKey));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

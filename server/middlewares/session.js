@@ -1,8 +1,9 @@
 const session = require('express-session');
 const MemoryStore = require('memorystore')(session);
+const config = require('../config');
 
 const expressSession = session({
-    secret: 'chatserversecretkey',
+    secret: config.sessionSecretKey,
     saveUninitialized: true,
     resave: false,
     cookie: {

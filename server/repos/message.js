@@ -20,7 +20,7 @@ const replies = {
     'whoareyou': 'I am a bot',
     'whatisyourname': 'My name is Koa',
     'canyouhelpme': 'Sure',
-    'whatistime': () => Date.now(),
+    'whatistime': () => new Date(Date.now()).toLocaleTimeString(),
 
     welcome: 'Hi %s! Welcome to Chat Awesome!',
     join: '%s has joined chat',

@@ -79,7 +79,9 @@ class ChatPanel extends PureComponent {
                             usersTyping.map(user =>
                                 <Fade key={`typing-${user}`}>
                                     <ChatItem message={{sender: user}} profile={profile}>
-                                        <h4 className="no-margin-bottom">{user}{' '}<img src={ellipsis} alt="is typing..."/></h4>
+                                        <h4 className="no-margin-bottom">
+                                            {user}{' '}<img src={ellipsis} alt="is typing..."/>
+                                        </h4>
                                     </ChatItem>
                                 </Fade>
                             )
