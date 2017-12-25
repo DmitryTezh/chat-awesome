@@ -29,22 +29,33 @@ module.exports = {
     },
 
     removeToken: (token) => {
-        usersByToken = _.omit(usersByToken, token);
+        delete usersByToken[token];
     },
 
-    addUserOnline: (login, socketId) => {
-        if (!usersOnline[login]) {
-            usersOnline[login] = {[socketId]: login};
+    getOnlineUsers: () => {
+        let onlineList = '';
+
+        _.forEach(usersOnline, user => onlineList += ', ' + Object.values(user)[0]);
+        if (onlineList !== '') {
+            onlineList = onlineList.substr(2);
+        }
+
+        return onlineList;
+    },
+
+    addUserOnline: (user, socketId) => {
+        if (!usersOnline[user.login]) {
+            usersOnline[user.login] = {[socketId]: user.profile.displayName};
         }
         else {
-            usersOnline[login][socketId] = login;
+            usersOnline[user.login][socketId] = user.profile.displayName;
         }
     },
 
-    removeUserOnline: (login, socketId) => {
-        usersOnline[login] = _.omit(usersOnline[login], socketId);
-        if (_.isEmpty(usersOnline[login])) {
-            usersOnline = _.omit(usersOnline, login);
+    removeUserOnline: (user, socketId) => {
+        delete usersOnline[user.login][socketId];
+        if (_.isEmpty(usersOnline[user.login])) {
+            delete usersOnline[user.login];
         }
     }
 };

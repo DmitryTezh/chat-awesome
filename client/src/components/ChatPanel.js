@@ -6,6 +6,7 @@ import {TransitionGroup} from 'react-transition-group';
 import {Icon} from './Icons';
 import {Fade} from './Fade';
 import {topMessageSelector} from '../reducers/chatReducer';
+import ellipsis from '../images/ellipsis.svg';
 
 const ChatItem = ({message, profile, children}) => (
     <tr>
@@ -46,7 +47,7 @@ class ChatPanel extends PureComponent {
         return (
             <Well className="chat-wrapper" ref={input => this.container = input}>
                 {
-                    messages.length === 0 &&
+                    (messages.length === 0 && usersTyping.length === 0) &&
                     <div className="center-wrapper">
                         <div className="center-content">
                             <h1 className="no-margin-top text-primary">
@@ -78,7 +79,7 @@ class ChatPanel extends PureComponent {
                             usersTyping.map(user =>
                                 <Fade key={`typing-${user}`}>
                                     <ChatItem message={{sender: user}} profile={profile}>
-                                        <h4>{user}{' is typing...'}</h4>
+                                        <h4 className="no-margin-bottom">{user}{' '}<img src={ellipsis} alt="is typing..."/></h4>
                                     </ChatItem>
                                 </Fade>
                             )

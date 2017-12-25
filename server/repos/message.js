@@ -22,7 +22,7 @@ const replies = {
     'canyouhelpme': 'Sure',
     'whatistime': () => Date.now(),
 
-    welcome: 'Hi %s! Welcome to Chat Awesome! Just ask me if you need some help!',
+    welcome: 'Hi %s! Welcome to Chat Awesome!',
     join: '%s has joined chat',
     leave: '%s has left chat',
     goodbye: 'See you soon, %s!',
