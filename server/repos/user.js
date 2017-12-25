@@ -15,17 +15,22 @@ module.exports = {
     },
 
     getUserByCredentials: (login, password) => {
-        return _.get(usersByLogin, [login, password]);
+        const token = uuid.v4();
+        const user = _.get(usersByLogin, [login, password]);
+
+        usersByToken[token] = user;
+
+        return {token, ...user};
     },
 
     addUser: (login, password) => {
         const token = uuid.v4();
-        const user = {token, login, profile: {displayName: login}};
+        const user = {login, profile: {displayName: login}};
 
         usersByToken[token] = user;
         usersByLogin[login] = {[password]: user};
 
-        return user;
+        return {token, ...user};
     },
 
     removeToken: (token) => {

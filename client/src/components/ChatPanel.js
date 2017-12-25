@@ -6,7 +6,7 @@ import {TransitionGroup} from 'react-transition-group';
 import {Icon} from './Icons';
 import {Fade} from './Fade';
 import {topMessageSelector} from '../reducers/chatReducer';
-import ellipsis from '../images/ellipsis.svg';
+import ellipsis from '../images/ellipsis.gif';
 
 const ChatItem = ({message, profile, children}) => (
     <tr>
